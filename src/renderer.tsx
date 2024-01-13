@@ -28,17 +28,11 @@ export const renderer = jsxRenderer(
             type="font/ttf"
             crossorigin="anonymous"
           />
-          <link
-            href="/static/nekonote.png"
-            as="image"
-            rel="preload"
-            crossorigin="anonymous"
-          ></link>
+          <link href="/static/nekonote.png" as="image" rel="preload"></link>
           <link
             href="/static/nekonote_open.png"
             as="image"
             rel="preload"
-            crossorigin="anonymous"
           ></link>
           <link
             rel="preload"
