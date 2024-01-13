@@ -6,21 +6,20 @@ const app = new Hono();
 
 app.get("*", renderer);
 
-app.get("/", (c) => {
-  return c.render(<Home />);
-});
-
 interface Env {
   R2_BUCKET: R2Bucket;
+  R2_URL: string;
 }
 
 app.get("/about", async (c) => {
   console.debug(c.env);
   const obj = await (c.env as unknown as Env).R2_BUCKET.list();
+  const r2Url = await (c.env as unknown as Env).R2_URL;
   if (obj === null) {
     return new Response("Not found", { status: 404 });
   }
-  return new Response(obj.objects.map((o) => o.key).join(", "));
+  const imageUrls = obj.objects.map((o) => `${r2Url}/${o.key}`);
+  return c.render(<Home imageUrls={imageUrls} />);
 });
 
 export const onRequest: PagesFunction<Env> = async (context) => {

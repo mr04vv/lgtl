@@ -1,9 +1,14 @@
 import { hc } from "hono/client";
 
-export const Home = async () => {
+type Props = {
+  imageUrls: string[];
+};
+export const Home = async (props: Props) => {
   return (
     <div>
-      <h1>Helldddddo!</h1>
+      {props.imageUrls.map((url) => (
+        <img src={url} />
+      ))}
     </div>
   );
 };
