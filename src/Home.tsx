@@ -105,7 +105,7 @@ const copiedTxt = css`
   justify-content: center;
   align-items: center;
   font-size: 24px;
-  font-family: zen;
+  font-family: "zen";
   &:hover {
     cursor: url("/static/nekonote_open.png") 55 25, auto;
   }
