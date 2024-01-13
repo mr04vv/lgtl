@@ -1,5 +1,6 @@
 import "hono";
 import { Style } from "hono/css";
+import { html } from "hono/html";
 import { jsxRenderer } from "hono/jsx-renderer";
 
 declare module "hono" {
@@ -10,8 +11,10 @@ declare module "hono" {
 
 export const renderer = jsxRenderer(
   ({ children, title }) => {
+    const timeStamp = Date.now();
     return (
       <html>
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.1/dist/cdn.min.js"></script>
         <head>
           <Style />
           <meta

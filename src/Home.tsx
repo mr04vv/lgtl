@@ -2,7 +2,7 @@ import { css } from "hono/css";
 import back from "/static/back.svg";
 import nikukyu from "/static/nikukyu.svg";
 import backMobile from "/static/back-mobile.svg";
-import { memo } from "hono/jsx";
+import { html } from "hono/html";
 type Props = {
   imageUrls: string[];
 };
@@ -30,6 +30,7 @@ const imgWrapperClass = css`
   justify-content: center;
   align-items: center;
   margin: 12px;
+  position: relative;
 `;
 
 const background = css`
@@ -51,6 +52,12 @@ const orangeTxt = css`
 
 const imgClass = css`
   width: 90%;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  transition: opacity 0.2s ease-in-out;
+  position: relative;
 `;
 
 const fotter = css`
@@ -81,9 +88,24 @@ const link = css`
   }
   color: #59370f;
   text-decoration: none;
+  display: flex;
+  align-items: center;
   &:hover {
     text-decoration: underline;
   }
+`;
+
+const copiedTxt = css`
+  position: absolute;
+  background-color: #0000004f;
+  width: 100%;
+  height: 100%;
+  width: 90%;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
 `;
 
 export const Home = async (props: Props) => {
@@ -98,11 +120,25 @@ export const Home = async (props: Props) => {
         })}
       </h1>
       <div class={boxClass}>
-        {props.imageUrls.map((url) => (
-          <div class={imgWrapperClass}>
-            <img class={imgClass} src={url} />
-          </div>
-        ))}
+        {props.imageUrls.map((url) => {
+          const copyText = `![LGTM](${url})`;
+          return (
+            <div class={imgWrapperClass}>
+              {html`
+                <div x-data="{ copied: false }">
+                  <img
+                    @click="navigator.clipboard.writeText('${copyText}'), copied = true, setTimeout(() => copied = false, 1000)"
+                    class="${imgClass}"
+                    src="${url}"
+                  />
+                  <div class="${copiedTxt}" x-show="copied" x-transition>
+                    コピーしたニャ！
+                  </div>
+                </div>
+              `}
+            </div>
+          );
+        })}
       </div>
       <div class={fotter}>
         <img class={nikukyuImg} src={nikukyu} />
