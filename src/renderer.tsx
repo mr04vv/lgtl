@@ -24,7 +24,7 @@ export const renderer = jsxRenderer(
           <meta property="og:url" content="https://lgtl.pages.dev/" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="LGTLatte" />
-          <meta property="og:description" content="らてさんのLGTM画像集" />
+          <meta property="og:description" content="" />
           <meta property="og:site_name" content="LGTLatte" />
           <meta property="og:image" content="/static/ogp.png" />
           <meta name="twitter:card" content="summary_large_image" />
