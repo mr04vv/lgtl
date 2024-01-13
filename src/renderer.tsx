@@ -47,16 +47,15 @@ export const renderer = jsxRenderer(
             type="font/ttf"
             crossorigin="anonymous"
           />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:creator" content="@mooriii" />
           <meta property="og:url" content="https://lgtl.pages.dev/" />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content="LGTLatte" />
+          <meta property="og:title" content="LGTLatte 🐈" />
           <meta property="og:description" content="" />
           <meta property="og:site_name" content="LGTLatte" />
           <meta property="og:image" content="/static/ogp.png" />
-          <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:creator" content="@mooriii" />
-          <meta name="twitter:image" content="/static/ogp.png" />
-          <meta name="twitter:title" content="LGTLatte" />
+
           <Style />
           <meta
             name="viewport"
