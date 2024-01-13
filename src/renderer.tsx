@@ -21,6 +21,24 @@ export const renderer = jsxRenderer(
             sizes="180x180"
             href="/static/apple-touch-icon-180x180.png"
           />
+          <link
+            rel="preload"
+            href="/static/NekoNeco.ttf"
+            as="font"
+            type="font/ttf"
+          />
+          <link href="/static/nekonote.png" as="image" rel="preload"></link>
+          <link
+            href="/static/nekonote_open.png"
+            as="image"
+            rel="preload"
+          ></link>
+          <link
+            rel="preload"
+            href="/static/ZenMaruGothic-Bold.ttf"
+            as="font"
+            type="font/ttf"
+          />
           <meta property="og:url" content="https://lgtl.pages.dev/" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="LGTLatte" />
