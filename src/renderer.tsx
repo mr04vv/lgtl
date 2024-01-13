@@ -29,7 +29,7 @@ export const renderer = jsxRenderer(
           <meta property="og:image" content="/static/ogp.png" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:creator" content="@mooriii" />
-          t <Style />
+          <Style />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
