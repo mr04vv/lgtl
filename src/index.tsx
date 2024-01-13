@@ -15,11 +15,12 @@ interface Env {
 }
 
 app.get("/about", async (c) => {
-  const obj = await (c.env as unknown as Env).R2_BUCKET.get("image.webp");
+  console.debug(c.env);
+  const obj = await (c.env as unknown as Env).R2_BUCKET.list();
   if (obj === null) {
     return new Response("Not found", { status: 404 });
   }
-  return new Response(obj.body);
+  return new Response(obj.objects.map((o) => o.key).join(", "));
 });
 
 export const onRequest: PagesFunction<Env> = async (context) => {
