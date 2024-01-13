@@ -10,20 +10,19 @@ interface Env {
   R2_URL: string;
   LATTE_TOKEN: string;
 }
-
+const shuffleArray = (array: string[]) => {
+  return array.slice().sort(() => Math.random() - Math.random());
+};
 app.get("/", async (c) => {
   const obj = await (c.env as unknown as Env).R2_BUCKET.list();
   const r2Url = await (c.env as unknown as Env).R2_URL;
   if (obj === null) {
     return new Response("Not found", { status: 404 });
   }
-  const imageUrls = obj.objects.map((o) => `${r2Url}/${o.key}`);
+  const imageUrls = shuffleArray(obj.objects.map((o) => `${r2Url}/${o.key}`));
+
   return c.render(<Home imageUrls={imageUrls} />);
 });
-
-const shuffleArray = (array: string[]) => {
-  return array.slice().sort(() => Math.random() - Math.random());
-};
 
 app.get("/api", async (c) => {
   if (c.req.header("LatteToken") !== (c.env as unknown as Env).LATTE_TOKEN) {
@@ -37,7 +36,7 @@ app.get("/api", async (c) => {
   const imageUrls = obj.objects.map((o) => `${r2Url}/${o.key}`);
 
   return c.json({
-    imageUrls: shuffleArray(imageUrls),
+    imageUrls,
   });
 });
 
