@@ -7,6 +7,9 @@ body {
   background-color: #fcf0de;
   color: aliceblue;
   margin: 0;
+}
+
+html {
   cursor: url(./nekonote.png) 55 25, auto;
 }
 
