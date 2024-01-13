@@ -130,6 +130,7 @@ export const Home = async (props: Props) => {
               <img
                 @click="navigator.clipboard.writeText('${copyText}'), copied = true, setTimeout(() => copied = false, 1000)"
                 class="${imgClass}"
+                loading="lazy"
                 src="${url}"
               />
               <div class="${copiedTxt}" x-show="copied" x-transition>
