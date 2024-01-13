@@ -54,7 +54,10 @@ export const renderer = jsxRenderer(
           <meta property="og:title" content="LGTLatte 🐈" />
           <meta property="og:description" content="" />
           <meta property="og:site_name" content="LGTLatte" />
-          <meta property="og:image" content="/static/ogp.png" />
+          <meta
+            property="og:image"
+            content="https://lgtl.pages.dev/static/ogp.png"
+          />
 
           <Style />
           <meta
