@@ -49,6 +49,10 @@ export const renderer = jsxRenderer(
           />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:creator" content="@mooriii" />
+          <meta
+            name="twitter:image:src"
+            content="https://lgtl.pages.dev/static/ogp.png"
+          />
           <meta property="og:url" content="https://lgtl.pages.dev/" />
           <meta property="og:type" content="website" />
           <meta property="og:title" content="LGTLatte 🐈" />
