@@ -12,16 +12,12 @@ interface Env {
 }
 
 app.get("/", async (c) => {
-  const imageUrls = [
-    "https://media.gettyimages.com/id/155284552/ja/%E3%82%B9%E3%83%88%E3%83%83%E3%82%AF%E3%83%95%E3%82%A9%E3%83%88/tabby-%E7%8C%AB%E3%81%AE%E3%83%9D%E3%83%BC%E3%83%88%E3%83%AC%E3%83%BC%E3%83%88%E7%99%BD%E8%83%8C%E6%99%AF.jpg?s=612x612&w=gi&k=20&c=oHieCgMLvy2CnOmxxoUmbMrxd0uumMUrbHELZX2eO_g=",
-  ];
-  return c.render(<Home imageUrls={imageUrls} />);
   const obj = await (c.env as unknown as Env).R2_BUCKET.list();
   const r2Url = await (c.env as unknown as Env).R2_URL;
   if (obj === null) {
     return new Response("Not found", { status: 404 });
   }
-  // const imageUrls = obj.objects.map((o) => `${r2Url}/${o.key}`);
+  const imageUrls = obj.objects.map((o) => `${r2Url}/${o.key}`);
   return c.render(<Home imageUrls={imageUrls} />);
 });
 

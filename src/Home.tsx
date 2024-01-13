@@ -31,6 +31,7 @@ const imgWrapperClass = css`
   align-items: center;
   margin: 12px;
   position: relative;
+  width: 80%;
 `;
 
 const background = css`
@@ -51,7 +52,6 @@ const orangeTxt = css`
 `;
 
 const imgClass = css`
-  width: 90%;
   &:hover {
     cursor: pointer;
     opacity: 0.9;
