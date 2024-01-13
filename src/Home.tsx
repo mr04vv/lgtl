@@ -132,6 +132,7 @@ export const Home = async (props: Props) => {
                 class="${imgClass}"
                 loading="lazy"
                 src="${url}"
+                crossorigin="anonymous"
               />
               <div class="${copiedTxt}" x-show="copied" x-transition>
                 コピーしたニャ<img class="${nikukyuImg}" src="${nikukyu2}" />
