@@ -21,6 +21,10 @@ app.get("/", async (c) => {
   return c.render(<Home imageUrls={imageUrls} />);
 });
 
+const shuffleArray = (array: string[]) => {
+  return array.slice().sort(() => Math.random() - Math.random());
+};
+
 app.get("/api", async (c) => {
   if (c.req.header("LatteToken") !== (c.env as unknown as Env).LATTE_TOKEN) {
     return new Response("Not found", { status: 404 });
@@ -33,7 +37,7 @@ app.get("/api", async (c) => {
   const imageUrls = obj.objects.map((o) => `${r2Url}/${o.key}`);
 
   return c.json({
-    imageUrls,
+    imageUrls: shuffleArray(imageUrls),
   });
 });
 
