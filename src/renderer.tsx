@@ -47,6 +47,8 @@ export const renderer = jsxRenderer(
           <meta property="og:image" content="/static/ogp.png" />
           <meta name="twitter:card" content="summary_large_image" />
           <meta name="twitter:creator" content="@mooriii" />
+          <meta name="twitter:image" content="/static/ogp.png" />
+          <meta name="twitter:title" content="LGTLatte" />
           <Style />
           <meta
             name="viewport"
