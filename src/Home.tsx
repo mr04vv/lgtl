@@ -1,6 +1,6 @@
 import { css } from "hono/css";
-import back from "/static/back.svg";
 import nikukyu from "/static/nikukyu.svg";
+import nikukyu2 from "/static/nikukyu2.svg";
 import backMobile from "/static/back-mobile.svg";
 import { html } from "hono/html";
 type Props = {
@@ -29,9 +29,8 @@ const imgWrapperClass = css`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 12px;
+  margin: 24px;
   position: relative;
-  width: 80%;
 `;
 
 const background = css`
@@ -53,11 +52,11 @@ const orangeTxt = css`
 
 const imgClass = css`
   &:hover {
-    cursor: pointer;
-    opacity: 0.9;
+    opacity: 0.5;
   }
   transition: opacity 0.2s ease-in-out;
   position: relative;
+  width: 100%;
 `;
 
 const fotter = css`
@@ -75,6 +74,7 @@ const fotterTxt = css`
 
 const nikukyuImg = css`
   width: 32px;
+  color: #fff;
 `;
 
 const link = css`
@@ -100,12 +100,15 @@ const copiedTxt = css`
   background-color: #0000004f;
   width: 100%;
   height: 100%;
-  width: 90%;
   top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 24px;
+  font-family: zen;
+  &:hover {
+    cursor: url("/static/nekonote_open.png") 55 25, auto;
+  }
 `;
 
 export const Home = async (props: Props) => {
@@ -122,22 +125,18 @@ export const Home = async (props: Props) => {
       <div class={boxClass}>
         {props.imageUrls.map((url) => {
           const copyText = `![LGTM](${url})`;
-          return (
-            <div class={imgWrapperClass}>
-              {html`
-                <div x-data="{ copied: false }">
-                  <img
-                    @click="navigator.clipboard.writeText('${copyText}'), copied = true, setTimeout(() => copied = false, 1000)"
-                    class="${imgClass}"
-                    src="${url}"
-                  />
-                  <div class="${copiedTxt}" x-show="copied" x-transition>
-                    コピーしたニャ！
-                  </div>
-                </div>
-              `}
+          return html`
+            <div class="${imgWrapperClass}" x-data="{ copied: false }">
+              <img
+                @click="navigator.clipboard.writeText('${copyText}'), copied = true, setTimeout(() => copied = false, 1000)"
+                class="${imgClass}"
+                src="${url}"
+              />
+              <div class="${copiedTxt}" x-show="copied" x-transition>
+                コピーしたニャ<img class="${nikukyuImg}" src="${nikukyu2}" />
+              </div>
             </div>
-          );
+          `;
         })}
       </div>
       <div class={fotter}>

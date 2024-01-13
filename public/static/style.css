@@ -7,9 +7,15 @@ body {
   background-color: #fcf0de;
   color: aliceblue;
   margin: 0;
+  cursor: url(./nekonote.png) 55 25, auto;
 }
 
 @font-face {
   font-family: "nekoneco";
   src: local("nekoneco"), url("./NekoNeco.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "zen";
+  src: local("zen"), url("./ZenMaruGothic-Bold.ttf") format("truetype");
 }

@@ -10,12 +10,23 @@ declare module "hono" {
 }
 
 export const renderer = jsxRenderer(
-  ({ children, title }) => {
-    const timeStamp = Date.now();
+  ({ children }) => {
     return (
       <html>
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.1/dist/cdn.min.js"></script>
         <head>
+          <link rel="icon" href="/static/favicon.ico" id="favicon" />
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/static/apple-touch-icon-180x180.png"
+          />
+          <meta property="og:url" content="https://lgtl.pages.dev/" />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="LGTLatte" />
+          <meta property="og:description" content="らてさんのLGTM画像集" />
+          <meta property="og:site_name" content="LGTLatte" />
+          <meta property="og:image" content="/static/ogp.png" />
           <Style />
           <meta
             name="viewport"
@@ -23,7 +34,7 @@ export const renderer = jsxRenderer(
           ></meta>
           <meta name="google" value="notranslate" />
           <link href="/static/style.css" rel="stylesheet" />
-          <title>{title}</title>
+          <title>LGTLatte 🐈</title>
         </head>
         <body>{children}</body>
       </html>
