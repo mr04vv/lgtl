@@ -1,1 +1,15 @@
-h1 { font-family: Arial, Helvetica, sans-serif; }
+h1 {
+  font-family: Arial, Helvetica, sans-serif, system-ui, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+}
+body {
+  background-color: #fcf0de;
+  color: aliceblue;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "nekoneco";
+  src: local("nekoneco"), url("./NekoNeco.ttf") format("truetype");
+}
