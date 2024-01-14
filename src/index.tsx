@@ -2,23 +2,30 @@ import { Hono } from "hono";
 import { renderer } from "./renderer";
 import { Home } from "./Home";
 import { basicAuth } from "hono/basic-auth";
+import { Uploader } from "./Uploader";
 
-const app = new Hono();
+type Env = {
+  Bindings: {
+    R2_BUCKET: R2Bucket;
+    R2_URL: string;
+    LATTE_TOKEN: string;
+    BASIC_USER_NAME: string;
+    BASIC_PASSWORD: string;
+    MODE: string;
+  };
+};
+const app = new Hono<Env>();
 
-app.get("*", renderer);
-interface Env {
-  R2_BUCKET: R2Bucket;
-  R2_URL: string;
-  LATTE_TOKEN: string;
-  BASIC_USER_NAME: string;
-  BASIC_PASSWORD: string;
-}
+app.get("/", renderer);
+
 const shuffleArray = (array: string[]) => {
   return array.slice().sort(() => Math.random() - Math.random());
 };
 app.get("/", async (c) => {
-  const obj = await (c.env as unknown as Env).R2_BUCKET.list();
-  const r2Url = await (c.env as unknown as Env).R2_URL;
+  const mode = c.env.MODE;
+  if (mode === "development") return c.render(<Home imageUrls={[]} />);
+  const obj = await c.env.R2_BUCKET.list();
+  const r2Url = c.env.R2_URL;
   if (obj === null) {
     return new Response("Not found", { status: 404 });
   }
@@ -26,27 +33,35 @@ app.get("/", async (c) => {
 
   return c.render(<Home imageUrls={imageUrls} />);
 });
+app.use("/upload", async (c, next) => {
+  const username = c.env.BASIC_USER_NAME;
+  const password = c.env.BASIC_PASSWORD;
+  return basicAuth({
+    username,
+    password,
+  })(c, next);
+});
 
 app.get("/upload", async (c) => {
-  const userName = (c.env as unknown as Env).BASIC_USER_NAME;
-  const password = (c.env as unknown as Env).BASIC_PASSWORD;
-
-  basicAuth({
-    username: "foo",
-    password: "bar",
-  });
-
-  return c.json({
-    text: "hello",
-  });
+  return c.render(
+    <html>
+      <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.1/dist/cdn.min.js"></script>
+      <head>
+        <link rel="icon" href="/static/favicon.ico" id="favicon" />
+      </head>
+      <body>
+        <Uploader />
+      </body>
+    </html>
+  );
 });
 
 app.get("/api", async (c) => {
-  if (c.req.header("LatteToken") !== (c.env as unknown as Env).LATTE_TOKEN) {
+  if (c.req.header("LatteToken") !== c.env.LATTE_TOKEN) {
     return new Response("Not found", { status: 404 });
   }
-  const obj = await (c.env as unknown as Env).R2_BUCKET.list();
-  const r2Url = await (c.env as unknown as Env).R2_URL;
+  const obj = await c.env.R2_BUCKET.list();
+  const r2Url = await c.env.R2_URL;
   if (obj === null) {
     return new Response("Not found", { status: 404 });
   }
@@ -56,13 +71,5 @@ app.get("/api", async (c) => {
     imageUrls,
   });
 });
-
-export const onRequest: PagesFunction<Env> = async (context) => {
-  const obj = await context.env.R2_BUCKET.get("some-key");
-  if (obj === null) {
-    return new Response("Not found", { status: 404 });
-  }
-  return new Response(obj.body);
-};
 
 export default app;

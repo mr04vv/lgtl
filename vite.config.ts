@@ -6,6 +6,11 @@ export default defineConfig({
   plugins: [
     pages(),
     devServer({
+      env: {
+        BASIC_USER_NAME: "user",
+        BASIC_PASSWORD: "password",
+        MODE: "development",
+      },
       entry: "src/index.tsx",
       cf: {
         bindings: {
