@@ -18,7 +18,6 @@ const bodyClass = css`
 const boxClass = css`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: minmax(auto, 44vh);
   margin: 8px;
   @media screen and (max-width: 600px) {
     display: flex;
@@ -58,7 +57,7 @@ const imgClass = css`
   transition: opacity 0.2s ease-in-out;
   position: relative;
   max-width: 100%;
-  max-height: 100%;
+  max-height: 34vh;
 `;
 
 const fotter = css`

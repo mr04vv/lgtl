@@ -23,7 +23,20 @@ const shuffleArray = (array: string[]) => {
 };
 app.get("/", async (c) => {
   const mode = c.env.MODE;
-  if (mode === "development") return c.render(<Home imageUrls={[]} />);
+  if (mode === "development")
+    return c.render(
+      <Home
+        imageUrls={[
+          "https://latte-images.mooriii.com/4dc4ceef-d866-43ee-b23d-5c9cbd14f908.webp",
+          ...new Array(40)
+            .fill(1)
+            .map(
+              (_, i) =>
+                `https://slack-imgs.com/?c=1&o1=ro&url=https%3A%2F%2Flgtl.pages.dev%2Fstatic%2Fogp.png?aa=${Math.random()}`
+            ),
+        ]}
+      />
+    );
   const obj = await c.env.R2_BUCKET.list();
   const r2Url = c.env.R2_URL;
   if (obj === null) {
