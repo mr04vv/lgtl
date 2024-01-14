@@ -58,6 +58,9 @@ const imgClass = css`
   position: relative;
   max-width: 100%;
   max-height: 34vh;
+  @media screen and (max-width: 600px) {
+    max-height: unset;
+  }
 `;
 
 const fotter = css`
