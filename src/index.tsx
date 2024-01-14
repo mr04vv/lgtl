@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { renderer } from "./renderer";
 import { Home } from "./Home";
+import { basicAuth } from "hono/basic-auth";
 
 const app = new Hono();
 
@@ -9,6 +10,8 @@ interface Env {
   R2_BUCKET: R2Bucket;
   R2_URL: string;
   LATTE_TOKEN: string;
+  BASIC_USER_NAME: string;
+  BASIC_PASSWORD: string;
 }
 const shuffleArray = (array: string[]) => {
   return array.slice().sort(() => Math.random() - Math.random());
@@ -22,6 +25,20 @@ app.get("/", async (c) => {
   const imageUrls = shuffleArray(obj.objects.map((o) => `${r2Url}/${o.key}`));
 
   return c.render(<Home imageUrls={imageUrls} />);
+});
+
+app.get("/upload", async (c) => {
+  const userName = (c.env as unknown as Env).BASIC_USER_NAME;
+  const password = (c.env as unknown as Env).BASIC_PASSWORD;
+
+  basicAuth({
+    username: "foo",
+    password: "bar",
+  });
+
+  return c.json({
+    text: "hello",
+  });
 });
 
 app.get("/api", async (c) => {
