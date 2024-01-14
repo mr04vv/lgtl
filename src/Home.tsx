@@ -56,10 +56,7 @@ const imgClass = css`
   }
   transition: opacity 0.2s ease-in-out;
   position: relative;
-  max-width: 100%;
-  max-height: 65%;
-  height: auto;
-  width: auto;
+  width: 100%;
 `;
 
 const fotter = css`
